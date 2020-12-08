@@ -1,0 +1,992 @@
+{
+  "schemaType": "pc",
+  "schemaVersion": "1.1",
+  "componentName": "分支推送",
+  "componentCode": "tpiVhMMY",
+  "design": {
+    "actionList": [
+      "didMount",
+      "onInit",
+      "createPatch",
+      "queryPatchDetail",
+      "checkboxChange",
+      "metadataSelect",
+      "metadataCheck",
+      "submit",
+      "backToListPage",
+      "isValidPatchDetailId",
+      "isPullAction"
+    ]
+  },
+  "data": {
+    "component": {
+      "iwkQAQgn": {
+        "componentType": "code",
+        "name": "Button3",
+        "id": "iwkQAQgn",
+        "type": "Button",
+        "events": {
+          "onClick": "createPatch"
+        },
+        "props": {
+          "_permissionAction": "0",
+          "buttonType": "common",
+          "size": "medium",
+          "hidden": "${}",
+          "tooltip": "",
+          "warning": false,
+          "showToast": true,
+          "style": {
+            "margin": "0px 0px 0px 15px"
+          },
+          "ifText": false,
+          "text": "生成补丁",
+          "type": "primary"
+        }
+      },
+      "poTYZaSg": {
+        "componentType": "code",
+        "name": "Div7",
+        "id": "poTYZaSg",
+        "type": "Div",
+        "events": {},
+        "props": {
+          "overflow": "auto",
+          "hidden": false,
+          "className": "checkBox-patch-detail"
+        }
+      },
+      "xOhFlzGA": {
+        "componentType": "datasource",
+        "id": "xOhFlzGA",
+        "events": {},
+        "props": {
+          "filter": "(function wrapped(){ //$src$=$/**\\n* 全局过滤数据源中的数据\\n*/\\nfunction filter(data) {\\n  return data;\\n}$//\n var _output_ = function filter(data) {\n  return data;\n};; return _output_;})()",
+          "data": "checkboxValue",
+          "cname": "checkboxValue"
+        }
+      },
+      "ndCbgWPi": {
+        "componentType": "datasource",
+        "id": "ndCbgWPi",
+        "props": {
+          "data": "_pageParam_",
+          "cname": "页面参数"
+        }
+      },
+      "HWlUsJYO": {
+        "componentType": "code",
+        "name": "Button2",
+        "id": "HWlUsJYO",
+        "type": "Button",
+        "events": {
+          "onClick": "backToListPage"
+        },
+        "props": {
+          "_permissionAction": "0",
+          "buttonType": "common",
+          "size": "medium",
+          "hidden": false,
+          "tooltip": "",
+          "warning": false,
+          "style": {
+            "margin": "0px 0px 0px 15px"
+          },
+          "ifText": false,
+          "text": "取消",
+          "type": "normal"
+        }
+      },
+      "zqokjdNl": {
+        "componentType": "code",
+        "name": "Tree1",
+        "id": "zqokjdNl",
+        "type": "Tree",
+        "events": {
+          "onCheck": "metadataCheck",
+          "onSelect": "metadataSelect"
+        },
+        "props": {
+          "hidden": false,
+          "checkable": true,
+          "selectable": true,
+          "defaultExpandAll": false,
+          "style": {
+            "padding": "0px 0px 0px 0px",
+            "overflow": "auto",
+            "height": "650px"
+          },
+          "showLine": true,
+          "checkStrictly": true,
+          "dataSource": "${data(\"treeData\")}"
+        }
+      },
+      "VtdyMhEf": {
+        "componentType": "code",
+        "name": "Div6",
+        "id": "VtdyMhEf",
+        "type": "Div",
+        "events": {},
+        "props": {
+          "hidden": false,
+          "style": {
+            "padding": "10px 10px 40px 10px",
+            "height": "40px"
+          }
+        }
+      },
+      "VJZNyHMd": {
+        "componentType": "code",
+        "bind": "",
+        "name": "Input1",
+        "id": "VJZNyHMd",
+        "type": "Input",
+        "events": {},
+        "props": {
+          "htmlType": "text",
+          "fieldName": "patchName",
+          "hasClear": false,
+          "multiple": false,
+          "rows": 4,
+          "_exceedMaxLength": "error",
+          "required": true,
+          "size": "medium",
+          "readonly": false,
+          "fieldLabel": "补丁名称",
+          "width": "full",
+          "style": {
+            "padding": "0px 0px 0px 0px",
+            "margin": "0px 10px 0px 10px",
+            "width": "150px"
+          },
+          "disabled": "${data(\"_pageParam_.patchId\")}",
+          "placeholder": "",
+          "_maxLength": 200
+        }
+      },
+      "HThwNteQ": {
+        "componentType": "code",
+        "name": "Dialog2",
+        "id": "HThwNteQ",
+        "type": "Dialog",
+        "events": {},
+        "props": {
+          "styleType": "primary",
+          "shouldUpdatePosition": true,
+          "style": {
+            "width": "1200px"
+          },
+          "_footerActions": "",
+          "title": ""
+        }
+      },
+      "LAAWYFiu": {
+        "componentType": "code",
+        "name": "Div5",
+        "id": "LAAWYFiu",
+        "type": "Div",
+        "events": {},
+        "props": {
+          "hidden": false,
+          "style": {
+            "borderTopStyle": "solid",
+            "padding": "5px 0px 5px 0px",
+            "borderColor": "#dcdee3",
+            "borderTopWidth": "1px"
+          }
+        }
+      },
+      "zwBLaHzE": {
+        "componentType": "code",
+        "name": "Grid1",
+        "id": "zwBLaHzE",
+        "type": "Grid",
+        "events": {},
+        "props": {
+          "layout": "6:12:6",
+          "hidden": false,
+          "style": {
+            "alignItems": "flex-start",
+            "flexDirection": "row",
+            "display": "flex",
+            "justifyContent": "flex-start"
+          },
+          "layout2": "6:8:10",
+          "align": "top"
+        }
+      },
+      "wTDqThfS": {
+        "componentType": "datasource",
+        "id": "wTDqThfS",
+        "events": {},
+        "props": {
+          "data": "treeData",
+          "cname": "treeData"
+        }
+      },
+      "WRWPPJea": {
+        "componentType": "code",
+        "name": "Label1",
+        "id": "WRWPPJea",
+        "type": "Label",
+        "events": {},
+        "props": {
+          "style": {
+            "margin": "10px 10px 10px 10px",
+            "fontSize": "12px",
+            "fontWeight": 500
+          },
+          "text": "选择目录",
+          "href": "",
+          "styleClass": "text",
+          "required": false
+        }
+      },
+      "WhDSnHNE": {
+        "componentType": "code",
+        "name": "CodeEditor1",
+        "id": "WhDSnHNE",
+        "type": "CodeEditor",
+        "events": {},
+        "props": {
+          "width": "100%",
+          "options": {
+            "lineNumbers": "off",
+            "minimap": {
+              "enabled": false
+            }
+          },
+          "style": {
+            "padding": "5px 0px 5px 0px",
+            "borderStyle": "none",
+            "height": "660px"
+          },
+          "language": "json",
+          "disabled": true,
+          "height": "100"
+        }
+      },
+      "TrtrUiXN": {
+        "componentType": "code",
+        "bind": "checkboxValue",
+        "name": "CheckboxGroup1",
+        "id": "TrtrUiXN",
+        "type": "CheckboxGroup",
+        "events": {
+          "onChange": "checkboxChange"
+        },
+        "props": {
+          "hidden": false,
+          "fieldLabel": "标签",
+          "count": "1",
+          "style": {
+            "overflow": "auto"
+          },
+          "disabled": false,
+          "dataSource": "${data(\"checkboxData\")}"
+        }
+      },
+      "itdYjqaT": {
+        "componentType": "code",
+        "name": "Button1",
+        "id": "itdYjqaT",
+        "type": "Button",
+        "events": {
+          "onClick": "submit"
+        },
+        "props": {
+          "_permissionAction": "0",
+          "buttonType": "common",
+          "size": "medium",
+          "hidden": "${!data(\"_pageParam_\").appCode}",
+          "tooltip": "",
+          "warning": false,
+          "showToast": true,
+          "style": {},
+          "ifText": false,
+          "text": "提交",
+          "type": "primary"
+        }
+      },
+      "gSaUYAWW": {
+        "componentType": "code",
+        "name": "Div4",
+        "id": "gSaUYAWW",
+        "type": "Div",
+        "events": {},
+        "props": {
+          "overflow": "scroll",
+          "hidden": false,
+          "style": {
+            "borderTopStyle": "solid",
+            "padding": "5px 10px 5px 10px",
+            "borderColor": "#dcdee3",
+            "overflow": "auto",
+            "borderTopWidth": "1px",
+            "height": "660px"
+          }
+        }
+      },
+      "dbZwwAQU": {
+        "componentType": "code",
+        "name": "Div1",
+        "id": "dbZwwAQU",
+        "type": "Div",
+        "events": {},
+        "props": {
+          "hidden": false,
+          "style": {
+            "display": "flex",
+            "justifyContent": "center"
+          }
+        }
+      },
+      "xYAmojLo": {
+        "componentType": "code",
+        "name": "Div2",
+        "id": "xYAmojLo",
+        "type": "Div",
+        "events": {},
+        "props": {
+          "hidden": false,
+          "style": {
+            "padding": "10px 10px 10px 10px"
+          }
+        }
+      },
+      "tUyEcYvE": {
+        "componentType": "code",
+        "name": "Label2",
+        "id": "tUyEcYvE",
+        "type": "Label",
+        "events": {},
+        "props": {
+          "style": {
+            "margin": "10px 10px 10px 10px",
+            "fontWeight": 500
+          },
+          "text": "勾选变化项",
+          "href": "",
+          "styleClass": "text",
+          "required": false
+        }
+      },
+      "auzfZzkh": {
+        "componentType": "datasource",
+        "id": "auzfZzkh",
+        "events": {},
+        "props": {
+          "data": "selectOptions",
+          "cname": "selectOptions"
+        }
+      },
+      "pdJSwkXi": {
+        "componentType": "code",
+        "parent": "gRNaHgQD",
+        "bind": "",
+        "name": "Input2",
+        "id": "pdJSwkXi",
+        "type": "Input",
+        "events": {},
+        "props": {
+          "htmlType": "text",
+          "fieldName": "pullVersion",
+          "hidden": "${!action(\"isPullAction\")}",
+          "hasClear": false,
+          "multiple": false,
+          "rows": 4,
+          "_exceedMaxLength": "error",
+          "required": false,
+          "size": "medium",
+          "readonly": false,
+          "fieldLabel": "拉取版本",
+          "width": "full",
+          "style": {
+            "padding": "0px 0px 0px 0px",
+            "margin": "0px 10px 0px 10px",
+            "width": "150px"
+          },
+          "disabled": true,
+          "placeholder": "",
+          "_maxLength": 200
+        }
+      },
+      "jqMhoqdN": {
+        "componentType": "code",
+        "bind": "data.targetTenant",
+        "name": "Select1",
+        "id": "jqMhoqdN",
+        "type": "Select",
+        "events": {},
+        "props": {
+          "hidden": "${action(\"isPullAction\")}",
+          "hasClear": false,
+          "isField": false,
+          "_bindDataSource": {
+            "mode": "service",
+            "value": {
+              "serviceType": "api",
+              "output": [],
+              "input": [
+                {
+                  "bind": "${data(\"_pageParam_|appCode\")}",
+                  "name": "appCode",
+                  "type": "string"
+                }
+              ],
+              "code": "getDevTenantByApp",
+              "name": "获取应用开发租户 (getDevTenantByApp)",
+              "appCode": "epoch"
+            },
+            "ds": "Select1Ds"
+          },
+          "autoLoad": true,
+          "mode": "single",
+          "_dataSource": "${datasource(\"Select1Ds\")}",
+          "filterLocal": true,
+          "showSearch": true,
+          "fieldLabel": "目标租户",
+          "width": "full",
+          "style": {
+            "display": "inline-block",
+            "width": "150px"
+          },
+          "disabled": false,
+          "placeholder": "请输入"
+        }
+      },
+      "zBKIqTnB": {
+        "componentType": "code",
+        "name": "Col2",
+        "id": "zBKIqTnB",
+        "type": "Col",
+        "events": {},
+        "props": {
+          "fixedSpan": "${}",
+          "overflow": "scroll",
+          "offset": 0,
+          "hidden": false,
+          "textAlign": "left",
+          "style": {
+            "padding": "0px 0px 0px 0px",
+            "margin": "0px 5px 0px 5px",
+            "borderColor": "#dcdee3",
+            "borderWidth": "1px",
+            "borderStyle": "solid",
+            "height": "700px"
+          },
+          "align": "top",
+          "span": 8
+        }
+      },
+      "cjIKVnIn": {
+        "componentType": "code",
+        "name": "BreadCrumb1",
+        "id": "cjIKVnIn",
+        "type": "BreadCrumb",
+        "events": {},
+        "props": {
+          "linkArray": [
+            {
+              "label": "补丁生成"
+            }
+          ]
+        }
+      },
+      "qBrMPZvm": {
+        "componentType": "code",
+        "name": "Col3",
+        "id": "qBrMPZvm",
+        "type": "Col",
+        "events": {},
+        "props": {
+          "fixedSpan": 0,
+          "offset": 0,
+          "hidden": false,
+          "textAlign": "left",
+          "style": {
+            "padding": "0px 0px 0px 0px",
+            "margin": "0px 0px 0px 6px",
+            "borderColor": "#dcdee3",
+            "borderWidth": "1px",
+            "borderStyle": "solid",
+            "height": "700px"
+          },
+          "align": "top",
+          "span": 9
+        }
+      },
+      "bOBRnBIS": {
+        "componentType": "code",
+        "name": "Col1",
+        "id": "bOBRnBIS",
+        "type": "Col",
+        "events": {},
+        "props": {
+          "fixedSpan": 0,
+          "offset": 0,
+          "hidden": false,
+          "textAlign": "left",
+          "style": {
+            "padding": "0px 0px 0px 0px",
+            "margin": "0px 5px 0px 0px",
+            "borderColor": "#dcdee3",
+            "borderWidth": "1px",
+            "borderStyle": "solid",
+            "height": "700px"
+          },
+          "align": "top",
+          "span": 6
+        }
+      },
+      "ULcyKnOS": {
+        "componentType": "datasource",
+        "id": "ULcyKnOS",
+        "events": {},
+        "props": {
+          "data": "data",
+          "cname": "data"
+        }
+      },
+      "NtqGBOsP": {
+        "componentType": "code",
+        "name": "PageContainer2",
+        "id": "NtqGBOsP",
+        "type": "PageContainer",
+        "events": {},
+        "props": {
+          "_page": {
+            "page": "textDiff",
+            "params": [
+              {
+                "value": "${data(\"_pageParam_|appCode\")}",
+                "key": "appCode"
+              },
+              {
+                "value": "${data(\"data|patchDetailId\")}",
+                "key": "patchDetailId"
+              },
+              {
+                "value": "${data(\"data|path\")}",
+                "key": "path"
+              }
+            ]
+          }
+        }
+      },
+      "etfBaUBZ": {
+        "componentType": "code",
+        "name": "Label3",
+        "id": "etfBaUBZ",
+        "type": "Label",
+        "events": {},
+        "props": {
+          "style": {
+            "margin": "10px 10px 10px 10px",
+            "fontWeight": 500
+          },
+          "text": "合并后内容",
+          "href": "",
+          "styleClass": "text",
+          "required": false
+        }
+      },
+      "OPgGmrcy": {
+        "componentType": "code",
+        "name": "Div3",
+        "id": "OPgGmrcy",
+        "type": "Div",
+        "events": {},
+        "props": {
+          "overflow": "scroll",
+          "hidden": false,
+          "style": {
+            "borderTopStyle": "solid",
+            "padding": "5px 10px 5px 10px",
+            "margin": "0px 0px 0px 0px",
+            "borderColor": "#dcdee3",
+            "borderTopWidth": "1px",
+            "height": "660px"
+          }
+        }
+      },
+      "TlgLIYvT": {
+        "componentType": "datasource",
+        "id": "TlgLIYvT",
+        "events": {},
+        "props": {
+          "data": "checkboxData",
+          "cname": "checkboxData"
+        }
+      },
+      "XMlGZTNt": {
+        "componentType": "code",
+        "name": "Div8",
+        "id": "XMlGZTNt",
+        "type": "Div",
+        "events": {},
+        "props": {
+          "hidden": false,
+          "style": {
+            "padding": "0px 0px 0px 10px",
+            "margin": "0px 0px 0px 15px"
+          }
+        }
+      },
+      "bqSozRQA": {
+        "componentType": "datasource",
+        "id": "bqSozRQA",
+        "props": {
+          "data": "Form1Ds",
+          "reserved": true,
+          "origin": "gRNaHgQD",
+          "cname": "Form1数据"
+        }
+      },
+      "UbFCCjtS": {
+        "componentType": "code",
+        "name": "PageContainer1",
+        "id": "UbFCCjtS",
+        "type": "PageContainer",
+        "events": {},
+        "props": {
+          "_page": {
+            "page": "patchDiffEditor",
+            "params": [
+              {
+                "value": "${data(\"_pageParam_|appCode\")}",
+                "key": "appCode"
+              },
+              {
+                "value": "${data(\"data|patchDetailId\")}",
+                "key": "patchDetailId"
+              }
+            ]
+          },
+          "style": {},
+          "autoReload": true
+        }
+      },
+      "gRNaHgQD": {
+        "componentType": "code",
+        "name": "Form1",
+        "id": "gRNaHgQD",
+        "type": "Form",
+        "events": {},
+        "props": {
+          "_dataSource": "${datasource(\"Form1Ds\")}",
+          "hidden": false,
+          "inline": true,
+          "labelAlign": "left",
+          "labelTextAlign": "right",
+          "style": {
+            "padding": "0px 0px 0px 0px",
+            "margin": "0px 0px 0px 0px"
+          }
+        }
+      },
+      "fypEXVRQ": {
+        "componentType": "code",
+        "name": "Dialog1",
+        "id": "fypEXVRQ",
+        "type": "Dialog",
+        "events": {
+          "onClose": "${$.get(\"closeDialog\",\"fypEXVRQ\")}",
+          "onCancel": "${$.get(\"closeDialog\",\"fypEXVRQ\")}",
+          "onOk": ""
+        },
+        "props": {
+          "styleType": "default",
+          "shouldUpdatePosition": true,
+          "closable": false,
+          "style": {
+            "width": "1200px"
+          },
+          "footerAlign": "center",
+          "_footerActions": "",
+          "title": ""
+        }
+      },
+      "noahwsvb": {
+        "componentType": "datasource",
+        "id": "noahwsvb",
+        "events": {},
+        "props": {
+          "data": "Select1Ds",
+          "query": {
+            "type": "request",
+            "content": "Select1Ds/query"
+          },
+          "cname": "Select1数据"
+        }
+      },
+      "ifnXprKH": {
+        "componentType": "datasource",
+        "id": "ifnXprKH",
+        "events": {},
+        "props": {
+          "data": "diffEditorContent",
+          "cname": "diffEditorContent"
+        }
+      }
+    },
+    "layout": [
+      {
+        "id": "HThwNteQ",
+        "children": [
+          {
+            "id": "NtqGBOsP"
+          }
+        ]
+      },
+      {
+        "id": "fypEXVRQ",
+        "children": [
+          {
+            "id": "UbFCCjtS"
+          }
+        ]
+      },
+      {
+        "id": "cjIKVnIn"
+      },
+      {
+        "id": "XMlGZTNt",
+        "children": [
+          {
+            "id": "VtdyMhEf",
+            "children": [
+              {
+                "id": "gRNaHgQD",
+                "children": [
+                  {
+                    "id": "VJZNyHMd"
+                  },
+                  {
+                    "id": "jqMhoqdN"
+                  },
+                  {
+                    "id": "pdJSwkXi"
+                  },
+                  {
+                    "id": "iwkQAQgn"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "xYAmojLo",
+            "children": [
+              {
+                "id": "zwBLaHzE",
+                "children": [
+                  {
+                    "id": "bOBRnBIS",
+                    "children": [
+                      {
+                        "id": "WRWPPJea"
+                      },
+                      {
+                        "id": "OPgGmrcy",
+                        "children": [
+                          {
+                            "id": "zqokjdNl"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "zBKIqTnB",
+                    "children": [
+                      {
+                        "id": "tUyEcYvE"
+                      },
+                      {
+                        "id": "gSaUYAWW",
+                        "children": [
+                          {
+                            "id": "poTYZaSg",
+                            "children": [
+                              {
+                                "id": "TrtrUiXN"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "qBrMPZvm",
+                    "children": [
+                      {
+                        "id": "etfBaUBZ"
+                      },
+                      {
+                        "id": "LAAWYFiu",
+                        "children": [
+                          {
+                            "id": "WhDSnHNE"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "dbZwwAQU",
+            "children": [
+              {
+                "id": "itdYjqaT"
+              },
+              {
+                "id": "HWlUsJYO"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "model": {
+      "Form1Model": {
+        "field": {},
+        "name": "Form1Model",
+        "cname": "Form1字段模型"
+      },
+      "Select1Model": {
+        "field": {},
+        "name": "Select1Model",
+        "cname": "Select1字段模型"
+      },
+      "_PageParam_": {
+        "field": {},
+        "reserved": true,
+        "name": "_PageParam_",
+        "cname": "页面参数"
+      }
+    },
+    "data": {
+      "diffEditorContent": {
+        "data": {
+          "leftContent": "{}",
+          "rightContent": "{}"
+        }
+      },
+      "data": {
+        "data": {}
+      },
+      "checkboxValue": {
+        "data": []
+      },
+      "selectOptions": {
+        "data": []
+      },
+      "Form1Ds": {
+        "data": {},
+        "type": "Form1Model"
+      },
+      "_pageParam_": {
+        "data": {},
+        "reserved": true,
+        "type": "_PageParam_"
+      },
+      "checkboxData": {
+        "data": []
+      },
+      "Select1Ds": {
+        "data": [],
+        "type": "Select1Model"
+      },
+      "treeData": {
+        "data": []
+      }
+    },
+    "request": {
+      "getPatchList": {
+        "code": "getPatchList",
+        "appCode": "epoch",
+        "type": "service"
+      },
+      "updatePagePatchContent": {
+        "code": "updatePagePatchContent",
+        "method": "POST",
+        "appCode": "epoch",
+        "type": "service"
+      },
+      "createPullPatch": {
+        "code": "createPullPatch",
+        "appCode": "epoch",
+        "type": "service"
+      },
+      "getTenantAppVersion/query": {
+        "code": "getTenantAppVersion",
+        "success": "(function wrapped(){ //$src$=$function success(resp) {\\n  console.log(\"getTenantAppVersion returns ~~~~~~~~~~~~~~~~~~~~~~~\",\"color:red\")\\n  console.log(resp)\\n  return resp;  \\n}$//\n var _output_ = function success(resp) {\n  console.log(\"getTenantAppVersion returns ~~~~~~~~~~~~~~~~~~~~~~~\", \"color:red\");\n  console.log(resp);\n  return resp;\n};; return _output_;})()",
+        "name": "getTenantAppVersion/query",
+        "appCode": "epoch",
+        "type": "service"
+      },
+      "submitPatch": {
+        "code": "submitPatch",
+        "method": "POST",
+        "appCode": "epoch",
+        "type": "service"
+      },
+      "getPatchInfoById": {
+        "code": "getPatchInfoById",
+        "appCode": "epoch",
+        "type": "service"
+      },
+      "selectPatch": {
+        "code": "selectPatch",
+        "method": "POST",
+        "appCode": "epoch",
+        "type": "service",
+        "url": "selectPatch"
+      },
+      "getDevTenantByApp": {
+        "code": "getDevTenantByApp",
+        "appCode": "epoch",
+        "type": "service"
+      },
+      "epoch_patch_create": {
+        "code": "epoch_patch_create",
+        "method": "POST",
+        "appCode": "epoch",
+        "type": "service"
+      },
+      "selectMetaForPatch": {
+        "code": "selectMetaForPatch",
+        "method": "POST",
+        "appCode": "epoch",
+        "type": "service"
+      },
+      "epoch_patch_details_get": {
+        "code": "epoch_patch_details_get",
+        "method": "GET",
+        "appCode": "epoch",
+        "type": "service"
+      },
+      "Select1Ds/query": {
+        "serviceType": "api",
+        "code": "getDevTenantByApp",
+        "data": {
+          "appCode": "${data(\"_pageParam_|appCode\")}"
+        },
+        "success": "(function wrapped(){ //$src$=$function success(resp) {\\n  let arr = [];\\n  if(resp.result && resp.result.length > 0) {\\n    resp.result.forEach(item => {\\n      arr.push({\\n        \"label\":item,\\n        \"value\":item\\n      })\\n    })\\n    return arr;\\n  }\\n}$//\n var _output_ = function success(resp) {\n  var arr = [];\n  if (resp.result && resp.result.length > 0) {\n    resp.result.forEach(function (item) {\n      arr.push({\n        \"label\": item,\n        \"value\": item\n      });\n    });\n    return arr;\n  }\n};; return _output_;})()",
+        "name": "Select1Ds/query",
+        "appCode": "epoch",
+        "type": "service"
+      }
+    },
+    "rule": [],
+    "style": "/* .checkBox-patch-detail .next-checkbox-wrapper {\n    border-bottom: 1px solid #e8e8e8;\n} */\n\n.patch-detail-operation-value {\n    -webkit-line-clamp: 4;\n\tdisplay: -webkit-box;\n\t-webkit-box-orient: vertical;\n\toverflow: hidden;\n\ttext-overflow: ellipsis;\n}\npre span {\n\t/* font-size: 80px; */\n\tfont-family:\"Roboto, Helvetica Neue, Helvetica, Tahoma, Arial, PingFang SC, Microsoft YaHei\";\n}\n\n.checkBox-patch-detail .next-checkbox-wrapper .next-checkbox {\n\tvertical-align: top;\n}\n\n.next-checkbox-wrapper {\n\tpadding-top: 5px;\n\tpadding-bottom: 5px;\n}",
+    "action": "(function(exports) {\"use strict\";\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nvar _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };\n\nexports.didMount = didMount;\nexports.onInit = onInit;\nexports.createPatch = createPatch;\nexports.queryPatchDetail = queryPatchDetail;\nexports.checkboxChange = checkboxChange;\nexports.metadataSelect = metadataSelect;\nexports.metadataCheck = metadataCheck;\nexports.submit = submit;\nexports.backToListPage = backToListPage;\nexports.isValidPatchDetailId = isValidPatchDetailId;\nexports.isPullAction = isPullAction;\nfunction didMount() {\n    var _this = this;\n\n    var appCode = this.getData(\"_pageParam_\").appCode;\n    var status = this.getData(\"_pageParam_\").status;\n    if (status || !appCode) {\n        this.setComponentProp(\"iwkQAQgn.hidden\", true);\n    }\n\n    if (status == 'success' || status == 'faile') {\n        this.setComponentProp(\"itdYjqaT.hidden\", true);\n    }\n    var patchName = this.getData(\"_pageParam_\").patchName;\n    this.setData(\"Form1Ds.patchName\", patchName);\n    console.log(this.getData(\"Form1Ds\"));\n    var pullVersion = this.getData(\"_pageParam_\").pullVersion;\n    this.setData(\"Form1Ds.pullVersion\", pullVersion);\n    var patchId = this.getData(\"_pageParam_\").patchId;\n\n    if (!appCode) {\n        this.ui.showDialog({\n            type: 'alert',\n            content: \"获取应用编码失败\"\n        });\n        this.forceRender();\n        return;\n    }\n\n    if (patchId) {\n        this.executeRequest(\"getPatchList\", {\n            appCode: appCode,\n            patchId: patchId\n        }).then(function (resp) {\n            bindPatchTree.bind(_this)(resp.result);\n            if (resp.result.length == 0) {\n                _this.ui.showDialog({\n                    type: 'alert',\n                    content: \"当前分支没有可推送补丁\",\n                    title: '生成补丁失败'\n                });\n                return;\n            }\n            _this.setData(\"data.patchId\", patchId);\n            var selectedItem = resp.result.filter(function (item) {\n                return item.selected && item.appliedStatus === \"success\" && item.pushStatus != \"success\";\n            });\n            if (selectedItem.length > 0) {\n                var id = selectedItem[0]._id;\n                _this.setComponentProp(\"zqokjdNl.selectedKeys\", [id]);\n                _this.setData(\"data.selectedIds\", [id]);\n                queryPatchDetail.bind(_this)(id);\n            }\n        });\n        this.executeRequest(\"getPatchInfoById\", {\n            patchId: patchId\n        }).then(function (resp) {\n            _this.setData(\"data.targetTenant\", resp.targetTenant);\n            _this.setComponentProp(\"jqMhoqdN.value\", resp.targetTenant);\n            _this.forceRender();\n            debugger;\n        });\n    } else {\n        this.executeRequest(\"getDevTenantByApp\", {\n            appCode: appCode\n        }).then(function (resp) {\n            if ((resp.result || []).length == 0) {\n                _this.ui.showDialog({\n                    type: 'alert',\n                    content: \"未获取到目标租户\"\n                });\n                return;\n            }\n            var targetTenant = '';\n            if (resp.result.includes(\"master_daily\")) {\n                targetTenant = \"master_daily\";\n            } else {\n                targetTenant = resp.result[0];\n            }\n            _this.setData(\"data.targetTenant\", targetTenant);\n            _this.setData(\"selectOptions\", [{\n                label: targetTenant,\n                value: targetTenant\n            }]);\n            _this.setComponentProp(\"jqMhoqdN.value\", targetTenant);\n            _this.forceRender();\n        });\n    }\n}\nfunction onInit() {}\nfunction createPatch() {\n    var _this2 = this;\n\n    if (this.getData(\"data.patchId\")) {\n        return;\n    }\n    var action = this.getData(\"_pageParam_\").action;\n    var appCode = this.getData(\"_pageParam_\").appCode;\n    var targetTenant = this.getData(\"data.targetTenant\");\n    var versionId = this.getData(\"_pageParam_\").appVersionId;\n    var pullVersion = this.getData(\"_pageParam_\").pullVersion;\n    var patchName = this.getData(\"Form1Ds.patchName\");\n    var validated = false;\n    this.getComponent(\"gRNaHgQD\").validate(function (errors) {\n        if (!errors || errors.length === 0) {\n            patchName = patchName.split(\" \").join(\"\");\n            if (!patchName || patchName.length === 0) {\n                _this2.dialog.showToast({ type: \"error\", content: \"补丁名称必须填写\" });\n                return;\n            } else {\n                validated = true;\n            }\n        }\n    });\n    if (!validated) {\n        return;\n    }\n\n    this.ui.showLoading('正在生成补丁', 0);\n    var requestUrl = \"epoch_patch_create\";\n    if (action === 'pull') {\n        requestUrl = \"createPullPatch\";\n    }\n\n    this.executeRequest(requestUrl, {\n        \"appCode\": appCode,\n        \"patchName\": patchName,\n        \"versionId\": versionId,\n        \"pullVersion\": pullVersion,\n        \"targetTenant\": targetTenant\n    }).then(function (resp) {\n        _this2.ui.hideLoading();\n        if (resp.errorCode) {\n            _this2.ui.showDialog({\n                type: 'alert',\n                content: resp.errorCode + \": \" + resp.errorMessage,\n                title: '生成补丁失败'\n            });\n            return;\n        }\n        var patchId = resp.patchId;\n        var appCode = _this2.getData(\"_pageParam_.appCode\");\n        _this2.executeRequest(\"getPatchList\", {\n            appCode: appCode,\n            patchId: patchId\n        }).then(function (resp) {\n            bindPatchTree.bind(_this2)(resp.result);\n            if (resp.result.length == 0) {\n                _this2.ui.showDialog({\n                    type: 'alert',\n                    content: \"当前分支没有可推送补丁\",\n                    title: '生成补丁失败'\n                });\n                return;\n            }\n            _this2.setData(\"data.patchId\", patchId);\n            var selectedItem = resp.result.filter(function (item) {\n                return item.selected && item.appliedStatus === \"success\" && item.pushStatus != \"success\";\n            });\n            if (selectedItem.length > 0) {\n                var id = selectedItem[0]._id;\n                _this2.setComponentProp(\"zqokjdNl.selectedKeys\", [id]);\n                _this2.setData(\"data.selectedIds\", [id]);\n                queryPatchDetail.bind(_this2)(id);\n            } else {\n                _this2.forceRender();\n            }\n        });\n    }).catch(function () {\n        return _this2.ui.hideLoading();\n    });\n}\nfunction queryPatchDetail(id) {\n    var _this3 = this;\n\n    this.setData(\"data.id\", id);\n    this.executeRequest(\"epoch_patch_details_get\", {\n        _id: id\n    }).then(function (resp) {\n        _this3.setData(\"data.operation\", resp.operation);\n        var patchArr = [];\n\n        if (resp.manualMerge === true) {\n            if (resp.jsonPatch) {\n                for (var i = 0; i < resp.jsonPatch.length; i++) {\n                    if (resp.jsonPatch[i].op == 'listOrder' && resp.jsonPatch[i].rawType == 'string') {\n                        var shellPatch = {\n                            patchDetailId: id,\n                            op: \"manualMerge\",\n                            overridePush: true,\n                            path: resp.jsonPatch[i].path,\n                            selected: true,\n                            status: \"valid\",\n                            value: resp.jsonPatch[i].lines.slice(3, resp.jsonPatch[i].lines.length)\n                        };\n                        patchArr.push(shellPatch);\n                    }\n                }\n            }\n        } else {\n            if (resp.jsonPatch) {\n                for (var _i = 0; _i < resp.jsonPatch.length; _i++) {\n                    if (resp.jsonPatch[_i].op != 'listOrder') {\n                        resp.jsonPatch[_i].patchDetailId = id;\n                        patchArr.push(resp.jsonPatch[_i]);\n                    }\n                }\n            }\n        }\n        bindPatchCheckGroup.bind(_this3)(patchArr, resp.pushStatus === \"success\");\n        if (resp.finalContent) {\n            bindPatchContent.bind(_this3)(resp.finalContent);\n        } else {\n            bindPatchContent.bind(_this3)(\"\");\n        }\n        _this3.forceRender();\n    }).catch(function () {\n        return _this3.ui.hideLoading();\n    });\n}\n\nfunction bindPatchCheckGroup(patchList, pushed) {\n    var _this4 = this;\n\n    var data = [];\n    var value = [];\n    patchList.forEach(function (item) {\n        console.log(\"%citem~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\", \"color:red\");\n        console.log(item);\n\n        var Button2 = window.Next.Button;\n        var icon = { 'add': 'add', 'move': 'minus' }[item.op] || 'switch';\n        var label = React.createElement(\n            \"div\",\n            { style: { 'display': 'inline-block', margin: '0px 5px 0px 5px' } },\n            React.createElement(\"i\", { className: \"next-icon next-icon-\" + icon, style: { 'marginRight': 4 } }),\n            React.createElement(\n                \"span\",\n                null,\n                item.op + \"：\" + item.path\n            ),\n            item.overridePush == true && ([\"listChangeEle\", \"listAddEle\", \"listRemoveEle\"].includes(item.op) && \"string\" == item.rawType || \"manualMerge\" === item.op) && React.createElement(\n                Button2,\n                { onClick: function onClick(e) {\n                        manualMergeText.call(_this4, e, item.patchDetailId, item.path);\n                    },\n                    style: {\n                        borderRadius: \"0px\",\n                        marginLeft: \"10px\",\n                        padding: \"0 8px\"\n                    }\n                },\n                \"合并\"\n            ),\n            item.overridePush == true && [\"manualMergeJSON\"].includes(item.op) && React.createElement(\n                Button2,\n                { onClick: function onClick(e) {\n                        var detailId = item._id;\n\n                        manualMerge.call(_this4, e, item.patchDetailId);\n                    },\n                    style: {\n                        borderRadius: \"0px\",\n                        marginLeft: \"10px\",\n                        padding: \"0 8px\"\n                    }\n                },\n                \"手动合并\"\n            ),\n            item.value && React.createElement(\n                \"pre\",\n                { className: 'patch-detail-operation-value',\n                    style: { 'marginLeft': '15px', 'overflow': 'auto', 'overflow-y': 'hidden', 'height': '100%', 'marginBottom': '5px', 'marginTop': '0px' } },\n                React.createElement(\n                    \"span\",\n                    null,\n                    JSON.stringify(item.value, null, \"\\t\")\n                )\n            ),\n            !item.value && React.createElement(\"br\", null)\n        );\n        var obj = {\n            \"label\": label,\n            \"value\": item.path,\n            \"checked\": item.selected,\n            \"disabled\": pushed\n        };\n        data.push(obj);\n        if (item.selected) {\n            value.push(item.path);\n        }\n    });\n    this.setData(\"checkboxData\", data);\n    this.setData(\"checkboxValue\", value);\n}\nfunction manualMergeText(e, patchDetailId, path) {\n    loadBabel.call(this);\n    var id = this.getData(\"data.patchDetailId\");\n    this.setData(\"data.patchDetailId\", patchDetailId);\n    this.setData(\"data.path\", path);\n    this.setComponentProp(\"HThwNteQ.visible\", true);\n    this.forceRender();\n}\n\nfunction bindPatchContent(value) {\n    if (typeof value == \"string\") {\n        try {\n            value = JSON.parse(value);\n            this.setComponentProp(\"WhDSnHNE.value\", JSON.stringify(value, null, \"\\t\"));\n        } catch (e) {\n            this.setComponentProp(\"WhDSnHNE.value\", \"\");\n        }\n    } else {\n        this.setComponentProp(\"WhDSnHNE.value\", \"\");\n    }\n}\nfunction manualMerge(e, id) {\n    loadBabel.call(this);\n    console.log(\"function manualMerge\");\n    console.log(e);\n    console.log(\"id : \" + id);\n    var selectedKeys = this.getComponentProp(\"zqokjdNl.selectedKeys\");\n    console.log(selectedKeys);\n    this.setData(\"data.patchDetailId\", id);\n\n    this.setComponentProp(\"fypEXVRQ.visible\", true);\n\n    if (selectedKeys.includes(id)) {\n        e.stopPropagation();\n    }\n    this.forceRender();\n}\n\nfunction bindPatchTree(patchDigestList) {\n    var _this5 = this;\n\n    var expandedKeys = [];\n    var checkedKeys = [];\n    var metaObj = {};\n    patchDigestList.forEach(function (item) {\n        if (!metaObj[item.metadataType]) {\n            metaObj[item.metadataType] = [];\n        }\n        var color = { 'update': 'blue', 'create': 'green', 'delete': 'red' }[item.operation] || 'blue';\n        var icon = { 'update': 'switch', 'create': 'add', 'delete': 'minus' }[item.operation] || 'prompt';\n        var txtPushStatus = \"\";\n        var pushStatusColor = '';\n        if (item.pushStatus === \"success\") {\n            txtPushStatus = '  (已提交)';\n            pushStatusColor = 'green';\n        } else if (item.pushStatus === \"fail\") {\n            txtPushStatus = '  (提交失败)';\n            pushStatusColor = 'red';\n        }\n        var Button2 = window.Next.Button;\n\n        metaObj[item.metadataType].push({\n            \"label\": React.createElement(\n                \"div\",\n                { style: { width: '100%' } },\n                React.createElement(\"i\", { className: \"next-icon next-icon-\" + icon, style: { marginRight: 4 } }),\n                React.createElement(\n                    \"span\",\n                    null,\n                    item.code,\n                    item.overridePush == true && React.createElement(\n                        \"span\",\n                        { style: { 'color': \"red\" } },\n                        \" (冲突推送)\"\n                    ),\n                    React.createElement(\n                        \"span\",\n                        { style: { 'color': pushStatusColor } },\n                        txtPushStatus\n                    )\n                ),\n                item.overridePush == true && React.createElement(\n                    Button2,\n                    { onClick: function onClick(e) {\n                            var detailId = item._id;\n\n                            manualMerge.call(_this5, e, detailId);\n                        },\n                        style: {\n                            borderRadius: \"0px\",\n                            marginLeft: \"10px\",\n                            padding: \"0 8px\"\n                        }\n                    },\n                    \"手动合并\"\n                )\n            ),\n            \"appliedStatus\": item.appliedStatus,\n            \"overridePush\": item.overridePush,\n            \"pushStatus\": item.pushStatus,\n            \"operation\": item.operation,\n            \"checkable\": item.pushStatus != \"success\",\n            \"key\": item._id\n        });\n        expandedKeys.push(item._id);\n        if (item.selected && item.appliedStatus === 'success' && item.pushStatus != \"success\") {\n            checkedKeys.push(item._id);\n        }\n    });\n    var treeData = [{\n        \"label\": \"元数据\",\n        \"key\": \"-1\",\n        \"children\": []\n    }];\n    for (var k in metaObj) {\n        var item = {\n            label: k,\n            key: k,\n            children: metaObj[k]\n        };\n        treeData[0].children.push(item);\n    }\n    this.setData(\"treeData\", treeData);\n    this.setComponentProp(\"zqokjdNl.expandedKeys\", expandedKeys);\n    this.setComponentProp(\"zqokjdNl.checkedKeys\", checkedKeys);\n}\nfunction checkboxChange(value, value2) {\n    var _this6 = this;\n\n    var id = this.getData(\"data.id\");\n    var dataOperation = this.getData(\"data.operation\");\n    console.log(value);\n    console.log(value2);\n    this.executeRequest(\"selectPatch\", {\n        \"id\": id,\n        \"selectedPaths\": value\n    }).then(function (resp) {\n        var appliedRes = false;\n        var id = _this6.getData(\"data.id\");\n        var treedataArr = _this6.getData('treeData')[0].children;\n        var checkedKeys = _this6.getComponentProp(\"zqokjdNl.checkedKeys\");\n        if (resp.errorMessage) {\n            bindPatchContent.bind(_this6)('');\n            if (checkedKeys.includes(id)) {\n                checkedKeys.splice(checkedKeys.indexOf(id), 1);\n            }\n        } else {\n            appliedRes = true;\n            var tmp = JSON.parse(resp.finalContent);\n            if (tmp.type === \"page\") {\n                if (tmp.content && tmp.content.data && tmp.content.data.actionSrc) {\n                    loadBabel().then(function (babel) {\n                        var compileRes = jsCompiler(babel, tmp.content.data.actionSrc);\n                        if (compileRes.error == null) {\n                            tmp.content.data.action = compileRes.compiled;\n                            resp.finalContent = JSON.stringify(tmp);\n                            bindPatchContent.bind(_this6)(resp.finalContent);\n                            _this6.forceRender();\n                            _this6.executeRequest(\"updatePagePatchContent\", {\n                                id: id,\n                                finalContent: resp.finalContent\n                            }).then(function (resp) {\n                                console.log(resp);\n                            });\n                        }\n                    });\n                }\n            } else {\n                bindPatchContent.bind(_this6)(resp.finalContent);\n            }\n        }\n\n        var data = getDataFromArray(treedataArr, id);\n        if (appliedRes) {\n            var _dataOperation = _this6.getData(\"data.operation\");\n            if (_dataOperation === 'delete') {\n                if (JSON.stringify(JSON.parse(resp.finalContent)) != '{}') {\n                    data.appliedStatus = 'init';\n                    if (checkedKeys.includes(id)) {\n                        checkedKeys.splice(checkedKeys.indexOf(id), 1);\n                    }\n                } else {\n                    data.appliedStatus = 'success';\n                    if (!checkedKeys.includes(id)) {\n                        checkedKeys.push(id);\n                    }\n                }\n            } else if (_dataOperation === 'create') {\n                if (JSON.stringify(JSON.parse(resp.finalContent)) === '{}') {\n                    data.appliedStatus = 'init';\n                    if (checkedKeys.includes(id)) {\n                        checkedKeys.splice(checkedKeys.indexOf(id), 1);\n                    }\n                } else {\n                    data.appliedStatus = 'success';\n                    if (!checkedKeys.includes(id)) {\n                        checkedKeys.push(id);\n                    }\n                }\n            } else {\n                data.appliedStatus = 'success';\n                if (value.length === 0) {\n                    if (checkedKeys.includes(id)) {\n                        checkedKeys.splice(checkedKeys.indexOf(id), 1);\n                    }\n                } else {\n                    if (!checkedKeys.includes(id)) {\n                        checkedKeys.push(id);\n                    }\n                }\n            }\n        } else {\n            data.appliedStatus = 'fail';\n        }\n        _this6.setComponentProp(\"zqokjdNl.checkedKeys\", checkedKeys);\n        _this6.forceRender();\n    });\n}\nfunction getDataFromArray(treedataArr, id) {\n    for (var i in treedataArr) {\n        var item = treedataArr[i];\n        if (item && item.children.length > 0) {\n            for (var k in item.children) {\n                if (item.children[k].key === id) {\n                    return item.children[k];\n                }\n            }\n        }\n    }\n}\nfunction metadataSelect(keys, data, e) {\n    console.log(e);\n    var id = data.node.props.eventKey;\n    this.setData(\"data.selectedIds\", keys);\n    this.setComponentProp(\"zqokjdNl.selectedKeys\", keys);\n\n    if (data.selected && isValidPatchDetailId(id)) {\n        queryPatchDetail.bind(this)(id);\n\n        this.forceRender();\n    } else {\n        bindPatchCheckGroup.bind(this)([], false);\n        bindPatchContent.bind(this)(\"\");\n        this.forceRender();\n    }\n}\nfunction metadataCheck(keys, data) {\n    var _this7 = this;\n\n    var id = data.node.props.eventKey;\n    var selected = data.checked;\n    var upadateIds = [];\n\n    if (isValidPatchDetailId(id)) {\n        upadateIds.push(id);\n    } else {\n        var nodeKeys = filterNodeKeys(data.node, selected);\n        if (selected) {\n            upadateIds = nodeKeys.patchkeys;\n\n            keys = keys.concat(upadateIds).concat(nodeKeys.typeKeys.filter(function (id) {\n                return !keys.includes(id);\n            }));\n        } else {\n            upadateIds = nodeKeys.patchkeys;\n            keys = keys.filter(function (id) {\n                return !upadateIds.includes(id);\n            }).filter(function (id) {\n                return !nodeKeys.typeKeys.includes(id);\n            });\n        }\n    }\n    if (upadateIds.length > 0) {\n        this.executeRequest(\"selectMetaForPatch\", {\n            \"ids\": upadateIds,\n            \"selected\": selected\n        }).then(function (resp) {\n            var mergeResult = resp.mergeResult;\n\n            if (mergeResult.errorList && mergeResult.errorList.length > 0) {\n                keys = keys.filter(function (key) {\n                    return mergeResult.errorList.indexOf(key) < 0;\n                });\n                if (selected) {\n                    _this7.ui.showToast({\n                        type: 'warning',\n                        duration: 3000,\n                        content: \"部分元数据未能生成合并后内容，未被勾选，请生成合并后内容后勾选！\"\n                    });\n                }\n            }\n\n            var selectedIds = _this7.getData(\"data.selectedIds\");\n            if (selectedIds && selectedIds.length > 0 && isValidPatchDetailId(selectedIds[0])) {\n                debugger;\n                queryPatchDetail.bind(_this7)(selectedIds[0]);\n            }\n            _this7.setComponentProp(\"zqokjdNl.checkedKeys\", keys);\n            _this7.forceRender();\n        });\n    } else {\n        debugger;\n        this.setComponentProp(\"zqokjdNl.checkedKeys\", keys);\n        this.forceRender();\n    }\n}\nfunction filterNodeKeys(node, selected) {\n    var nodeKeys = {\n        patchkeys: [],\n        typeKeys: []\n    };\n    var children = node.props.children;\n    if (!children) {\n        if (isValidPatchDetailId(node.key) && node.props.pushStatus != 'success') {\n            nodeKeys.patchkeys.push(node.key);\n        }\n    } else {\n        nodeKeys.typeKeys.push(node.props._key);\n        for (var i in children) {\n            var tmp = filterNodeKeys(children[i], selected);\n            if (selected) {\n                if (tmp.patchkeys.length > 0) {\n                    nodeKeys.patchkeys = nodeKeys.patchkeys.concat(tmp.patchkeys);\n                    nodeKeys.typeKeys = nodeKeys.typeKeys.concat(tmp.typeKeys);\n                }\n            } else {\n                nodeKeys.patchkeys = nodeKeys.patchkeys.concat(tmp.patchkeys);\n                nodeKeys.typeKeys = nodeKeys.typeKeys.concat(tmp.typeKeys);\n            }\n        }\n    }\n    return nodeKeys;\n}\nfunction submit() {\n    var _this8 = this;\n\n    var patchId = this.getData(\"data.patchId\");\n    var appCode = this.getData(\"_pageParam_\").appCode;\n    if (!patchId) {\n        this.ui.showDialog({\n            type: 'alert',\n            content: '请先生成补丁',\n            title: '提交补丁失败'\n        });\n        return;\n    }\n    this.ui.showLoading('正在提交', 0, 180 * 1000);\n    this.executeRequest(\"submitPatch\", {\n        \"patchId\": patchId\n    }).then(function (resp) {\n        _this8.ui.hideLoading();\n        if (resp.result.success) {\n            _this8.ui.showToast({\n                type: 'success',\n                content: \"补丁推送成功\"\n            }, function () {\n                _this8.router.goTo(\"epoch_patch_list?appCode=\" + appCode);\n            });\n        } else {\n            var ctx = _this8;\n            _this8.ui.showDialog({\n                type: 'alert',\n                content: \"\" + resp.result.errorMessage,\n                title: '推送补丁失败',\n                onOk: function onOk() {\n                    ctx.router.goTo(\"epoch_patch_list?appCode=\" + appCode);\n                }\n            });\n        }\n    }).catch(function () {\n        return _this8.ui.hideLoading();\n    });\n}\nfunction backToListPage() {\n    var appCode = this.getData(\"_pageParam_\").appCode;\n    var action = this.getData(\"_pageParam_\").action;\n    if (action === 'pull') {\n        this.router.goTo(\"patch_merge_list?appCode=\" + appCode);\n    } else {\n        this.router.goTo(\"epoch_patch_list?appCode=\" + appCode);\n    }\n}\nfunction isValidPatchDetailId(id) {\n    if (!id) {\n        return false;\n    }\n    var metadataTypes = [\"table\", \"dataSource\", \"page\", \"flow\", \"api\", \"eventListener\", \"event\", \"script\", \"bizComponent\", \"menu\", \"properties\", \"appAccessControl\", \"hsfMethod\", \"configData\", \"appConfig\", \"excel\", \"appDataSource\", \"schedule\", \"errorCode\", \"model\", \"chart\", \"-1\", -1];\n    return !metadataTypes.includes(id);\n}\nfunction loadBabel() {\n    if (loadBabel.loaded) {\n        return Promise.resolve();\n    }\n    window.require = undefined;\n    window.define = undefined;\n    return new Promise(function (resolve, reject) {\n        if (typeof window.require === 'function') {\n            require([location.protocol + \"//g.alicdn.com/lattice/base-front/1.0.29/lib/babel/babel.min.js\"], function (babel) {\n                resolve(babel);\n            });\n        } else {\n            window.require = undefined;\n            window.define = undefined;\n            console.log(11111);\n            var script = document.createElement('script');\n            script.setAttribute('src', '//g.alicdn.com/lattice/base-front/1.0.29/lib/babel/babel.min.js');\n            document.body.appendChild(script);\n            script.onload = function () {\n                console.info(arguments);\n                console.log(window.Babel, window.define, window.require);\n                resolve(window.Babel);\n                loadBabel.loaded = true;\n            };\n        }\n    });\n}\nfunction jsCompiler(babel, source) {\n    var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};\n    var defaultImport = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;\n    var useEval = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : true;\n\n    if (!babel) return { source: source, compiled: source, error: new Error('babel not found') };\n    var compiled = '';\n    var compileSrc = source;\n    var error = null;\n    var exports = [];\n    if (typeof source === 'string' && source !== '') {\n        try {\n            compiled = compileSrc;\n            compiled = babel.transform(compileSrc, _extends({ presets: ['react', 'es2015', 'stage-0'], comments: false }, options));\n            console.log(compiled);\n            exports = compiled.metadata.modules.exports.exported || [];\n            if (defaultImport) {\n                compiled = \"(function(exports) {\" + compiled.code + \";return exports;})({})\";\n                if (useEval) {\n                    var rlt = eval(\"(\" + compiled + \")\");\n                    exports = Object.keys(rlt);\n                }\n            } else {\n                compiled = compiled.code;\n            }\n        } catch (e) {\n            console.error(e);\n            error = e;\n        }\n    }\n    return {\n        source: source, compiled: compiled, error: error, exports: exports\n    };\n}\nfunction isPullAction() {\n    var action = this.getData(\"_pageParam_\").action;\n    if (action === 'pull') {\n        return true;\n    } else {\n        return false;\n    }\n};return exports;})({})",
+    "actionSrc": "/* 在需要导出的方法前加上export，方法内this指向上下文Context */\n/**\n*  生命周期 - 页面挂载时\n*/\nexport function didMount() {\n    \n    const appCode = this.getData(\"_pageParam_\").appCode;\n    const status = this.getData(\"_pageParam_\").status;\n    if(status || !appCode){\n        this.setComponentProp(\"iwkQAQgn.hidden\",true);\n    }\n    \n    if(status == 'success' || status == 'faile'){\n        this.setComponentProp(\"itdYjqaT.hidden\", true);\n    }\n    const patchName = this.getData(\"_pageParam_\").patchName;\n    this.setData(\"Form1Ds.patchName\", patchName);\n    console.log(this.getData(\"Form1Ds\"))\n    const pullVersion = this.getData(\"_pageParam_\").pullVersion;\n    this.setData(\"Form1Ds.pullVersion\", pullVersion);\n    const patchId = this.getData(\"_pageParam_\").patchId;\n    if (!appCode) {\n        this.ui.showDialog({\n            type: 'alert',\n            content: \"获取应用编码失败\"\n        });\n        this.forceRender();\n        return;\n    }\n    \n    if (patchId) {\n        this.executeRequest(\"getPatchList\", {\n            appCode: appCode,\n            patchId: patchId\n        }).then(resp => {\n            bindPatchTree.bind(this)(resp.result);\n            if (resp.result.length == 0) {\n                this.ui.showDialog({\n                    type: 'alert',\n                    content: \"当前分支没有可推送补丁\",\n                    title: '生成补丁失败',\n                });\n                return;\n            }\n            this.setData(\"data.patchId\", patchId);\n            const selectedItem = resp.result.filter(item =>\n                item.selected && item.appliedStatus === \"success\" && item.pushStatus != \"success\"\n            );\n            if (selectedItem.length > 0) {\n                const id = selectedItem[0]._id;\n                this.setComponentProp(\"zqokjdNl.selectedKeys\", [id]);\n                this.setData(\"data.selectedIds\", [id]);\n                queryPatchDetail.bind(this)(id);\n            }\n        });\n        this.executeRequest(\"getPatchInfoById\", {\n            patchId: patchId\n        }).then(resp => {\n            this.setData(\"data.targetTenant\", resp.targetTenant);\n            this.setComponentProp(\"jqMhoqdN.value\", resp.targetTenant);\n            this.forceRender();\n            debugger\n        })\n    } else {\n        // 新建补丁\n        this.executeRequest(\"getDevTenantByApp\", {\n            appCode: appCode\n        }).then(resp => {\n            if ((resp.result || []).length == 0) {\n                this.ui.showDialog({\n                    type: 'alert',\n                    content: \"未获取到目标租户\"\n                });\n                return;\n            }\n            let targetTenant = '';\n            if (resp.result.includes(\"master_daily\")) {\n                targetTenant = \"master_daily\";\n            } else {\n                targetTenant = resp.result[0];\n            }\n            this.setData(\"data.targetTenant\", targetTenant);\n            this.setData(\"selectOptions\", [{\n                label: targetTenant,\n                value: targetTenant\n            }])\n            this.setComponentProp(\"jqMhoqdN.value\", targetTenant);\n            this.forceRender();\n        })\n    }\n} \nexport function onInit() {\n    \n}\nexport function createPatch(){\n    if (this.getData(\"data.patchId\")){\n        return;\n    }\n    const action = this.getData(\"_pageParam_\").action;\n    const appCode = this.getData(\"_pageParam_\").appCode;\n    const targetTenant = this.getData(\"data.targetTenant\");\n    const versionId = this.getData(\"_pageParam_\").appVersionId;\n    const pullVersion = this.getData(\"_pageParam_\").pullVersion;\n    let patchName = this.getData(\"Form1Ds.patchName\");\n    let validated = false;\n    this.getComponent(\"gRNaHgQD\").validate(errors => {\n        if (!errors || errors.length === 0) {\n            patchName = patchName.split(\" \").join(\"\");\n            if (!patchName || patchName.length === 0) {\n                this.dialog.showToast({ type: \"error\", content: \"补丁名称必须填写\" });\n                return;\n            } else {\n                validated = true;\n            }\n        }\n    });\n    if(!validated) {\n        return;\n    }\n    \n    // this.ui.showLoading('正在生成补丁', 0, 180 * 1000);\n    this.ui.showLoading('正在生成补丁', 0);\n    let requestUrl = \"epoch_patch_create\";\n    if(action === 'pull') {\n        requestUrl = \"createPullPatch\";\n    }\n    \n    this.executeRequest(requestUrl,{\n        \"appCode\": appCode,\n        \"patchName\": patchName,\n        \"versionId\": versionId,\n        \"pullVersion\": pullVersion,\n        \"targetTenant\": targetTenant\n    }).then(resp => {\n        this.ui.hideLoading();\n        if(resp.errorCode){\n             this.ui.showDialog({\n                 type: 'alert',\n                 content: `${resp.errorCode}: ${resp.errorMessage}`,\n                 title: '生成补丁失败',\n             });\n             return;\n        }\n        const patchId = resp.patchId;\n        const appCode = this.getData(\"_pageParam_.appCode\");\n        this.executeRequest(\"getPatchList\", {\n            appCode: appCode,\n            patchId: patchId\n        }).then(resp => {\n            bindPatchTree.bind(this)(resp.result);\n            if (resp.result.length == 0) {\n                this.ui.showDialog({\n                    type: 'alert',\n                    content: \"当前分支没有可推送补丁\",\n                    title: '生成补丁失败',\n                });\n                return;\n            }\n            this.setData(\"data.patchId\", patchId);\n            const selectedItem = resp.result.filter(\n                item => item.selected && item.appliedStatus === \"success\" && item.pushStatus != \"success\"\n            );\n            if (selectedItem.length > 0) {\n                const id = selectedItem[0]._id;\n                this.setComponentProp(\"zqokjdNl.selectedKeys\", [id]);\n                this.setData(\"data.selectedIds\", [id]);\n                queryPatchDetail.bind(this)(id);\n            } else {\n                this.forceRender();\n            }\n        })\n      \n    }).catch(() => this.ui.hideLoading());\n}\n/**\n * 选中元数据，查询补丁完整数据\n */\nexport function queryPatchDetail(id){\n    this.setData(\"data.id\", id);\n    this.executeRequest(\"epoch_patch_details_get\",{\n        _id: id\n    }).then(resp => {\n        this.setData(\"data.operation\", resp.operation);\n        let patchArr = []\n        // let paths = [];\n        if (resp.manualMerge === true) {\n            // 用户手动合并的情况下需要单独处理\n            // let metadataPatch = {\n            //     patchDetailId: id,\n            //     op: \"manualMergeJSON\",\n            //     overridePush: true,\n            //     path: \"/\",\n            //     selected: true,\n            //     status: \"valid\",\n            //     value: resp.finalContent\n            // }\n            // patchArr.push(metadataPatch)\n            if (resp.jsonPatch) {\n                for (let i = 0; i < resp.jsonPatch.length; i++) {\n                    if (resp.jsonPatch[i].op == 'listOrder'\n                            && resp.jsonPatch[i].rawType == 'string') {\n                        let shellPatch = {\n                            patchDetailId: id,\n                            op: \"manualMerge\",\n                            overridePush: true,\n                            path: resp.jsonPatch[i].path,\n                            selected: true,\n                            status: \"valid\",\n                            value: resp.jsonPatch[i].lines.slice(3, resp.jsonPatch[i].lines.length)\n                        }\n                        patchArr.push(shellPatch)\n                    }\n                }\n            }\n        } else {\n            // 非用户手动合并\n            //过滤 listorder 类型的 operation\n            if (resp.jsonPatch) {\n                for (let i = 0; i < resp.jsonPatch.length; i++) {\n                    if (resp.jsonPatch[i].op != 'listOrder') {\n                        resp.jsonPatch[i].patchDetailId = id\n                        patchArr.push(resp.jsonPatch[i])\n                        // paths.push(resp.jsonPatch[i].path)\n                    }\n                }\n            }\n            \n        }\n        bindPatchCheckGroup.bind(this)(patchArr, resp.pushStatus === \"success\");\n        if (resp.finalContent) {\n            bindPatchContent.bind(this)(resp.finalContent);\n        } else {\n            bindPatchContent.bind(this)(\"\");\n        }\n        this.forceRender();\n    }).catch(() => this.ui.hideLoading());\n}\n/**\n * 绑定元数据变化项\n */\nfunction bindPatchCheckGroup(patchList, pushed){\n    const data = [];\n    const value = [];\n    patchList.forEach(item => {\n        console.log(\"%citem~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\",\"color:red\")\n        console.log(item)\n        // 元数据的脚本字段，如果元数据补丁冲突了，需要加上合并按钮\n        // 脚本的判断方式需要修改\n        // 1、第一种思路是给\"listChangeEle\", \"listAddEle\", \"listRemoveEle\"类型的 operation 也加上 rawType，依据 rawType === string 筛选\n        const Button2 = window.Next.Button;\n        const icon = { 'add': 'add', 'move': 'minus'}[item.op] || 'switch';        \n        let label = (<div style={{ 'display': 'inline-block', margin: '0px 5px 0px 5px'}}>\n            <i className={`next-icon next-icon-${icon}`} style={{ 'marginRight': 4 }}></i>\n            <span>{item.op + \"：\" + item.path}</span>\n            {(item.overridePush == true &&\n                ((([\"listChangeEle\", \"listAddEle\", \"listRemoveEle\"].includes(item.op)) && \"string\" == item.rawType) || \"manualMerge\" === item.op))\n                && <Button2 onClick={(e) => {\n                    // let detailId = item._id;\n                    // debugger\n                    manualMergeText.call(this, e, item.patchDetailId, item.path)\n                }}\n                    style={{\n                        borderRadius: \"0px\",\n                        marginLeft: \"10px\",\n                        padding: \"0 8px\"\n                    }}\n                >{\"合并\"}</Button2>}\n            {(item.overridePush == true && [\"manualMergeJSON\"].includes(item.op))\n                && <Button2 onClick={(e) => {\n                    let detailId = item._id;\n                    // debugger\n                    manualMerge.call(this, e, item.patchDetailId)\n                }}\n                    style={{\n                        borderRadius: \"0px\",\n                        marginLeft: \"10px\",\n                        padding: \"0 8px\"\n                    }}\n                >{\"手动合并\"}</Button2>}\n            {item.value\n                && <pre className={'patch-detail-operation-value'}\n                    style={{ 'marginLeft': '15px', 'overflow': 'auto', 'overflow-y': 'hidden', 'height': '100%', 'marginBottom': '5px', 'marginTop': '0px' }}>\n                    <span>{JSON.stringify(item.value, null, \"\\t\")}</span>\n                </pre>}\n            {!item.value && <br />}\n        </div>);\n        const obj = {\n            \"label\": label,\n            \"value\": item.path,\n            \"checked\": item.selected,\n            \"disabled\": pushed\n        };\n        data.push(obj);\n        if (item.selected) {\n            value.push(item.path);\n        }\n    });\n    this.setData(\"checkboxData\", data);\n    this.setData(\"checkboxValue\",value);\n}\nfunction manualMergeText(e, patchDetailId, path) {\n    loadBabel.call(this)\n    let id = this.getData(\"data.patchDetailId\");\n    this.setData(\"data.patchDetailId\", patchDetailId);\n    this.setData(\"data.path\", path);\n    this.setComponentProp(\"HThwNteQ.visible\", true);\n    this.forceRender();\n}\n/**\n * 绑定合并后内容\n */\nfunction bindPatchContent(value){\n    if(typeof value == \"string\"){\n        try{\n            value = JSON.parse(value);\n            this.setComponentProp(\"WhDSnHNE.value\", JSON.stringify(value, null, \"\\t\"));\n        }catch(e){\n            this.setComponentProp(\"WhDSnHNE.value\", \"\");\n        }\n    }else{\n        this.setComponentProp(\"WhDSnHNE.value\", \"\");\n    }\n}\nfunction manualMerge(e, id) {\n    // debugger\n    loadBabel.call(this)\n    console.log(\"function manualMerge\")\n    console.log(e)\n    console.log(\"id : \"+id)\n    let selectedKeys = this.getComponentProp(\"zqokjdNl.selectedKeys\")\n    console.log(selectedKeys)\n    this.setData(\"data.patchDetailId\", id);\n    \n    this.setComponentProp(\"fypEXVRQ.visible\", true);\n    // 若当前treeNode 已经处于选中状态，需阻止事件传播，避免触发 treeNode 的 select 事件\n    if (selectedKeys.includes(id)) {\n        e.stopPropagation()\n    }\n    this.forceRender();\n}\n/**\n * 绑定元数据目录树\n */\nfunction bindPatchTree(patchDigestList){\n    const expandedKeys = [];\n    const checkedKeys = [];\n    const metaObj = {}; \n    patchDigestList.forEach(item => {\n        if (!metaObj[item.metadataType]){\n            metaObj[item.metadataType] = [];\n        }\n        const color = { 'update': 'blue', 'create': 'green', 'delete': 'red' }[item.operation] || 'blue';\n        const icon = { 'update': 'switch', 'create': 'add', 'delete': 'minus' }[item.operation] || 'prompt';\n        let txtPushStatus = \"\";\n        let pushStatusColor = '';\n        if (item.pushStatus === \"success\") {\n            txtPushStatus = '  (已提交)';\n            pushStatusColor = 'green';\n        } else if (item.pushStatus === \"fail\") {\n            txtPushStatus = '  (提交失败)';\n            pushStatusColor = 'red';\n        }\n        const Button2 = window.Next.Button;\n        \n        \n        metaObj[item.metadataType].push({\n            \"label\": <div style={{ width: '100%' }}>\n                <i className={`next-icon next-icon-${icon}`} style={{ marginRight: 4 }}></i>\n                <span>\n                    {item.code}\n                    {item.overridePush == true && \n                        <span style={{ 'color': \"red\" }}>{\" (冲突推送)\"}</span>\n                    }\n                    \n                    <span style={{'color':pushStatusColor}}>{txtPushStatus}</span>\n                </span>\n                {item.overridePush == true && <Button2 onClick={(e) => {let detailId = item._id;\n                    // debugger\n                    manualMerge.call(this, e, detailId)} } \n                    style={{\n                        borderRadius:\"0px\",\n                        marginLeft: \"10px\",\n                        padding: \"0 8px\"\n                    }}\n                    >{\"手动合并\"}</Button2>}\n            </div>,\n            \"appliedStatus\":item.appliedStatus,\n            \"overridePush\": item.overridePush,\n            \"pushStatus\": item.pushStatus,\n            \"operation\": item.operation,\n            \"checkable\": item.pushStatus != \"success\",\n            \"key\":item._id\n        })\n        expandedKeys.push(item._id);\n        if (item.selected && item.appliedStatus === 'success' && item.pushStatus != \"success\"){\n            checkedKeys.push(item._id);\n        }\n    })\n    const treeData = [{\n        \"label\": \"元数据\",\n        \"key\": \"-1\",\n        \"children\":[]\n        }];\n    for (let k in metaObj){\n        const item = {\n            label:k,\n            key:k,\n            children: metaObj[k]\n        }\n        treeData[0].children.push(item);\n    }\n    this.setData(\"treeData\", treeData);\n    this.setComponentProp(\"zqokjdNl.expandedKeys\", expandedKeys);\n    this.setComponentProp(\"zqokjdNl.checkedKeys\", checkedKeys);\n}\n/**\n * 勾选元数据中的变化点\n */\nexport function checkboxChange(value,value2){\n    const id = this.getData(\"data.id\");\n    const dataOperation = this.getData(\"data.operation\");\n    console.log(value)\n    console.log(value2)\n    this.executeRequest(\"selectPatch\",{\n        \"id\": id,\n        \"selectedPaths\":value\n    }).then(resp => {\n        let appliedRes = false;\n        const id = this.getData(\"data.id\");\n        const treedataArr = this.getData('treeData')[0].children;\n        let checkedKeys = this.getComponentProp(\"zqokjdNl.checkedKeys\");\n        if (resp.errorMessage) {\n            // 合并失败\n            bindPatchContent.bind(this)('');\n            if (checkedKeys.includes(id)) {\n                checkedKeys.splice(checkedKeys.indexOf(id),1);\n            }\n        } else {\n            // 合并成功\n            appliedRes = true;\n            let tmp = JSON.parse(resp.finalContent);\n            if (tmp.type === \"page\") {\n                // page 类型的元数据需要单独处理\n                if (tmp.content && tmp.content.data && tmp.content.data.actionSrc) {\n                    loadBabel().then((babel) => {\n                        const compileRes = jsCompiler(babel, tmp.content.data.actionSrc);\n                        if (compileRes.error == null) {\n                            tmp.content.data.action = compileRes.compiled;\n                            resp.finalContent = JSON.stringify(tmp);\n                            bindPatchContent.bind(this)(resp.finalContent);\n                            this.forceRender();\n                            this.executeRequest(\"updatePagePatchContent\", {\n                                id: id,\n                                finalContent: resp.finalContent\n                            }).then(resp => {\n                                console.log(resp);\n                            })\n                        }\n                    });\n                }\n            } else {\n                bindPatchContent.bind(this)(resp.finalContent);\n            }\n        }\n        // 设置元数据的 applieStatus 状态\n        let data = getDataFromArray(treedataArr, id);\n        if (appliedRes) {\n            // 设置本条元数据补丁的勾选状态\n            const dataOperation = this.getData(\"data.operation\");\n            if (dataOperation === 'delete') {\n                // 删除元数据\n                if (JSON.stringify(JSON.parse(resp.finalContent)) != '{}') {\n                    data.appliedStatus = 'init';\n                    if (checkedKeys.includes(id)) {\n                        checkedKeys.splice(checkedKeys.indexOf(id), 1);\n                    }\n                } else {\n                    data.appliedStatus = 'success';\n                    if (!checkedKeys.includes(id)) {\n                        checkedKeys.push(id);\n                    }\n                }\n            } else if (dataOperation === 'create') {\n                // 新增元数据\n                if (JSON.stringify(JSON.parse(resp.finalContent)) === '{}') {\n                    data.appliedStatus = 'init';\n                    if (checkedKeys.includes(id)) {\n                        checkedKeys.splice(checkedKeys.indexOf(id), 1);\n                    }\n                } else {\n                    data.appliedStatus = 'success';\n                    if (!checkedKeys.includes(id)) {\n                        checkedKeys.push(id);\n                    }\n                }\n            } else {\n                // 更新元数据\n                data.appliedStatus = 'success';\n                if (value.length === 0) {\n                    // 清除本条元数据补丁选中状态\n                    if (checkedKeys.includes(id)) {\n                        checkedKeys.splice(checkedKeys.indexOf(id), 1);\n                    }\n                } else {\n                    // 将本条元数据补丁置为选中状态\n                    if (!checkedKeys.includes(id)) {\n                        checkedKeys.push(id);\n                    }\n                }\n            }\n        } else {\n            data.appliedStatus = 'fail';\n        }\n        this.setComponentProp(\"zqokjdNl.checkedKeys\", checkedKeys);\n        this.forceRender();\n    });\n    \n}\nfunction getDataFromArray(treedataArr, id) {\n    for (let i in treedataArr) {\n        let item = treedataArr[i];\n        if (item && item.children.length > 0) {\n            for (let k in item.children) {\n                if (item.children[k].key === id) {\n                    return item.children[k];\n                }\n            }\n        }\n    }\n}\n/**\n * 选中元数据，展示合并后内容\n */\nexport function metadataSelect(keys,data,e) {\n    console.log(e)\n    const id = data.node.props.eventKey;\n    this.setData(\"data.selectedIds\",keys);\n    this.setComponentProp(\"zqokjdNl.selectedKeys\", keys)\n    // console.log(\"keys: \" + keys)\n    // console.log(\"props: \" + this.getComponentProp(\"zqokjdNl.selectedKeys\"))\n    if (data.selected && isValidPatchDetailId(id)) {\n        queryPatchDetail.bind(this)(id);\n        // data.patchDetailId,用于 jsonDiffEditor\n        // this.setData(\"data.patchDetailId\", id);\n        this.forceRender();\n    } else {\n        bindPatchCheckGroup.bind(this)([], false);\n        bindPatchContent.bind(this)(\"\");\n        this.forceRender();\n    }\n}\n/**\n * 选择元数据勾选是否合并\n */\nexport function metadataCheck(keys,data) {\n    const id = data.node.props.eventKey;\n    const selected = data.checked;\n    let upadateIds = [];\n    \n    if (isValidPatchDetailId(id)) {\n        // 单条操作元数据\n        upadateIds.push(id);\n    } else {\n        // 批量操作元数据\n        const nodeKeys = filterNodeKeys(data.node, selected);\n        if (selected) {\n            // 批量 check 元数据\n            upadateIds = nodeKeys.patchkeys\n            // .filter(id => !keys.includes(id));\n            keys = keys.concat(upadateIds)\n                        .concat(nodeKeys.typeKeys.filter(id => !keys.includes(id)));\n        } else {\n            // 批量 uncheck 元数据\n            upadateIds = nodeKeys.patchkeys;\n            keys = keys.filter(id => !upadateIds.includes(id))\n                        .filter(id => !nodeKeys.typeKeys.includes(id));\n        }\n    }\n    if (upadateIds.length > 0) {\n        this.executeRequest(\"selectMetaForPatch\", {\n            \"ids\": upadateIds,\n            \"selected\": selected\n        }).then(resp => {\n            const mergeResult = resp.mergeResult;\n            // 过滤生成合并后内容失败的补丁项\n            if (mergeResult.errorList && mergeResult.errorList.length > 0) {\n                keys = keys.filter(key => mergeResult.errorList.indexOf(key) < 0);\n                if (selected) {\n                    this.ui.showToast({\n                        type: 'warning',\n                        duration: 3000,\n                        content: \"部分元数据未能生成合并后内容，未被勾选，请生成合并后内容后勾选！\"\n                    });\n                }\n            }\n            // 设置当前处于选中状态补丁的勾选变化项和合并后内容显示效果\n            let selectedIds = this.getData(\"data.selectedIds\");\n            if (selectedIds && selectedIds.length > 0 && isValidPatchDetailId(selectedIds[0])) {\n                // let selectedFinalContent = mergeResult.successMap[selectedIds[0]];\n                // bindPatchContent.bind(this)(selectedFinalContent);\n                debugger\n                queryPatchDetail.bind(this)(selectedIds[0])\n            }\n            this.setComponentProp(\"zqokjdNl.checkedKeys\", keys);\n            this.forceRender();\n        });\n    } else {\n        debugger\n        this.setComponentProp(\"zqokjdNl.checkedKeys\", keys);\n        this.forceRender();\n    }\n}\nfunction filterNodeKeys(node, selected) {\n    let nodeKeys = {\n        patchkeys: [],\n        typeKeys:[]\n    };\n    const children= node.props.children;\n    if (!children) {\n        // 已经是叶子节点\n        if (isValidPatchDetailId(node.key) \n            // && node.props.appliedStatus === 'success' \n            && node.props.pushStatus != 'success') {\n            nodeKeys.patchkeys.push(node.key);\n        }\n    } else {\n        // 还不是叶子节点\n        nodeKeys.typeKeys.push(node.props._key);\n        for (let i in children) {\n            let tmp = filterNodeKeys(children[i], selected);\n            if (selected) {\n                if (tmp.patchkeys.length > 0) {\n                    nodeKeys.patchkeys = nodeKeys.patchkeys.concat(tmp.patchkeys);\n                    nodeKeys.typeKeys = nodeKeys.typeKeys.concat(tmp.typeKeys);\n                }\n            } else {\n                nodeKeys.patchkeys = nodeKeys.patchkeys.concat(tmp.patchkeys);\n                nodeKeys.typeKeys = nodeKeys.typeKeys.concat(tmp.typeKeys);\n            }\n        }\n    }\n    return nodeKeys;\n}\n/**\n * 提交发布项\n */\nexport function submit(){\n    const patchId = this.getData(\"data.patchId\"); \n    const appCode = this.getData(\"_pageParam_\").appCode;\n    if (!patchId){\n        this.ui.showDialog({\n            type: 'alert',\n            content: '请先生成补丁',\n            title: '提交补丁失败',\n        });\n        return;\n    }\n    this.ui.showLoading('正在提交', 0, 180 * 1000);\n    this.executeRequest(\"submitPatch\",{\n        \"patchId\": patchId\n    }).then(resp => {\n        this.ui.hideLoading();\n        if(resp.result.success){\n            this.ui.showToast({\n                type: 'success',\n                content: \"补丁推送成功\"\n            }, () => {\n                this.router.goTo(\"epoch_patch_list?appCode=\" + appCode);\n            });\n        }else{\n            const ctx = this; \n            this.ui.showDialog({\n                type: 'alert',\n                content: `${resp.result.errorMessage}`,\n                title: '推送补丁失败',\n                onOk: function() {\n                    ctx.router.goTo(\"epoch_patch_list?appCode=\" + appCode);\n                }\n            });\n        }\n       \n    }).catch(() => this.ui.hideLoading());\n}\n/**\n * 取消按钮，返回列表页\n */\nexport function backToListPage() {\n    const appCode = this.getData(\"_pageParam_\").appCode;\n    const action = this.getData(\"_pageParam_\").action;\n    if (action === 'pull') {\n        // 从补丁合并记录页面过来的\n        this.router.goTo(\"patch_merge_list?appCode=\" + appCode);\n    } else {\n        // 从应用发布界面过来的\n        this.router.goTo(\"epoch_patch_list?appCode=\" + appCode);\n    }\n    \n}\n/**\n * 过滤checkBox中非id的数据\n */\nexport function isValidPatchDetailId(id) {\n    if (!id) {\n        return false;\n    }\n    let metadataTypes = [\n        \"table\",\n        \"dataSource\",\n        \"page\",\n        \"flow\",\n        \"api\",\n        \"eventListener\",\n        \"event\",\n        \"script\",\n        \"bizComponent\",\n        \"menu\",\n        \"properties\",\n        \"appAccessControl\",\n        \"hsfMethod\",\n        \"configData\",\n        \"appConfig\",\n        \"excel\",\n        \"appDataSource\",\n        \"schedule\",\n        \"errorCode\",\n        \"model\",\n        \"chart\",\n        \"-1\",\n        -1\n    ];\n    return !metadataTypes.includes(id);\n}\nfunction loadBabel() {\n    if (loadBabel.loaded) {\n        return Promise.resolve();\n    }\n    window.require = undefined\n    window.define = undefined\n    return new Promise((resolve, reject) => {\n        if (typeof window.require === 'function') {\n            require([`${location.protocol}//g.alicdn.com/lattice/base-front/1.0.29/lib/babel/babel.min.js`], function (babel) {\n                resolve(babel);\n            })\n        } else {\n            window.require = undefined\n            window.define = undefined\n            console.log(11111)\n            const script = document.createElement('script');\n            script.setAttribute('src', '//g.alicdn.com/lattice/base-front/1.0.29/lib/babel/babel.min.js')\n            document.body.appendChild(script);\n            script.onload = function () {\n                console.info(arguments);\n                console.log(window.Babel,window.define,window.require)\n                resolve(window.Babel);\n                loadBabel.loaded = true;\n            }\n        }\n    });\n}\nfunction jsCompiler(babel, source, options = {}, defaultImport = true, useEval = true) {\n    if (!babel) return { source, compiled: source, error: new Error('babel not found') };\n    let compiled = '';\n    let compileSrc = source;\n    let error = null;\n    let exports = [];\n    if (typeof source === 'string' && source !== '') {\n        try {\n            compiled = compileSrc;\n            compiled = babel.transform(compileSrc, { presets: ['react', 'es2015', 'stage-0'], comments: false, ...options });\n            console.log(compiled);\n            exports = compiled.metadata.modules.exports.exported || [];\n            if (defaultImport) {\n                compiled = `(function(exports) {${compiled.code};return exports;})({})`;\n                if (useEval) {\n                    let rlt = eval(\"(\" + compiled + \")\");\n                    exports = Object.keys(rlt);\n                }\n            } else {\n                compiled = compiled.code;\n            }\n        } catch (e) {\n            console.error(e);\n            error = e;\n        }\n    }\n    return {\n        source, compiled, error, exports\n    }\n}\nexport function isPullAction(){\n    const action = this.getData(\"_pageParam_\").action;\n    if (action === 'pull') {\n        return true;\n    } else {\n        return false;\n    }\n}",
+    "module": {}
+  }
+}

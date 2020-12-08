@@ -1,0 +1,58 @@
+{
+    "columns": [
+        {
+            "name": "index._id",
+            "type": "text"
+        },
+        {
+            "name": "myId",
+            "type": "keyword"
+        },
+        {
+            "name": "release_date",
+            "type": "date"
+        },
+        {
+            "name": "author",
+            "type": "text"
+        },
+        {
+            "name": "name",
+            "type": "text"
+        },
+        {
+            "name": "addr",
+            "type": "text"
+        },
+        {
+            "name": "age",
+            "type": "text"
+        },
+        {
+            "name": "page_count",
+            "type": "long"
+        }
+    ],
+    "rows": [
+        [
+            null,
+            null,
+            "1989-05-25T15:00:00.000Z",
+            "Dan Simmons",
+            "Hyperion",
+            null,
+            null,
+            482
+        ],
+        [
+            null,
+            null,
+            "1965-05-31T16:00:00.000Z",
+            "Frank Herbert",
+            "Dune",
+            null,
+            null,
+            604
+        ]
+    ]
+}

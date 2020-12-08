@@ -1,0 +1,98 @@
+{
+    "_pkg_version": [
+        "5f61c365a58fda33bd4693a4"
+    ],
+    "_type": "epoch_table",
+    "active": "1",
+    "creator": "250909",
+    "dataSourceType": "tenant",
+    "extProps": {},
+    "gmtCreate": 1597322094831,
+    "gmtModified": 1600689122132,
+    "historyId": "741966b9-7670-4670-959b-8272677ebdfa",
+    "id": "5f688cf0636e961f445ef448",
+    "operations": [],
+    "pkgCode": "xs_test",
+    "tableIndexes": [],
+    "updater": "250909",
+    "code": "xstest_aaa",
+    "dataSourceCode": "default_mongodb",
+    "name": "aaa",
+    "appCode": "xs_test",
+    "dbType": "mongo",
+    "fields": [
+        {
+            "key": true,
+            "sequenceType": "mongodb_id",
+            "start": 1,
+            "type": "sequence",
+            "code": "_id",
+            "name": "ID",
+            "columnName": "_id",
+            "primaryKey": true,
+            "nameKey": false,
+            "notNull": true,
+            "unique": true
+        },
+        {
+            "key": false,
+            "maxLength": 50,
+            "type": "text",
+            "code": "contemt",
+            "name": "contemt",
+            "columnName": "contemt",
+            "primaryKey": false,
+            "nameKey": false,
+            "notNull": false,
+            "unique": false
+        },
+        {
+            "key": false,
+            "type": "datetime",
+            "code": "gmtCreate",
+            "name": "创建时间",
+            "columnName": "gmtCreate",
+            "primaryKey": false,
+            "nameKey": false,
+            "notNull": true,
+            "unique": false
+        },
+        {
+            "key": false,
+            "type": "datetime",
+            "code": "gmtModified",
+            "name": "更新时间",
+            "columnName": "gmtModified",
+            "primaryKey": false,
+            "nameKey": false,
+            "notNull": true,
+            "unique": false
+        },
+        {
+            "key": false,
+            "multiUser": false,
+            "type": "user",
+            "code": "creator",
+            "name": "创建人",
+            "columnName": "creator",
+            "primaryKey": false,
+            "nameKey": false,
+            "notNull": true,
+            "unique": false,
+            "comment": "工号"
+        },
+        {
+            "key": false,
+            "multiUser": false,
+            "type": "user",
+            "code": "updater",
+            "name": "修改人",
+            "columnName": "updater",
+            "primaryKey": false,
+            "nameKey": false,
+            "notNull": true,
+            "unique": false,
+            "comment": "工号"
+        }
+    ]
+}

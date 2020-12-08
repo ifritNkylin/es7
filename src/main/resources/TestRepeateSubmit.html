@@ -1,0 +1,37 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <script >
+            var aaa = '';
+            function cc() {
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', 'http://localhost:8080/test?token=' + aaa, true);
+
+                xhr.onload = function (a) {
+                    console.log(a)
+                    console.log(a.currentTarget.response)
+                };
+                xhr.send();
+                // alert("aa")
+            }
+
+            function start() {
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', 'http://localhost:8080/start', true);
+
+                xhr.onload = function (a) {
+                    console.log(a)
+                    console.log(a.currentTarget.response)
+                    aaa = a.currentTarget.response
+                };
+                xhr.send();
+            }
+
+            start();
+
+        </script>
+        <input type="button" value="click me" onclick="cc()"/>
+    </body>
+</html>

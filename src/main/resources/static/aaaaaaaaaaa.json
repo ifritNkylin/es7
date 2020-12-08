@@ -1,0 +1,241 @@
+[
+  {
+    "_id": {
+      "$oid": "5f51e77abec37b5d8ca59bab"
+    },
+    "_pkg_version": [
+      "5efd90a7dd721f78313c1b2b",
+      "5f559c3da3f82e02f49b3173",
+      "5f56ee686e26073598c75d1d",
+      "5f583d0b52698d2195fa9d9f",
+      "5f58ca180fd64c0b4261c082",
+      "5f59cb761618202a777791d1",
+      "5f5a310718dda91075e54bb1",
+      "5f5b41769b148e3164f2f139",
+      "5f61ce2b5adc3c3386c6f71f",
+      "5f6e2470c1af1e2fd5dcfdec",
+      "5f70850379a0cf3c4f42f780",
+      "5f7092d2818f536cf5e5a26a",
+      "5f7202bb14429413adfc3318",
+      "5f72cd8c5a14287c1e8f55d7",
+      "5f72d4a414429413adfc3791",
+      "5f7fd2b4c4c2a05e7c1f63d8",
+      "5f805446127b747d1fc70480",
+      "5f805f67064c283e3b82f098",
+      "5f819b8ce645d569aa7dd56c",
+      "5f83ec0f3ccdf5536b7431da",
+      "5f8444903ccdf5536b7438df",
+      "5f8525a69584bc24f7074e7d",
+      "5f866a953ccdf5536b744b45",
+      "5f86b504d1ab602e5d424750",
+      "5f86bf90d1ab602e5d424856"
+    ],
+    "_type": "epoch_ui_page",
+    "_types": [
+      "epoch_ui_page"
+    ],
+    "active": "1",
+    "appCode": "user_mgt",
+    "branchId": null,
+    "code": "test_slot",
+    "content": {
+      "schemaVersion": "1.1",
+      "componentCode": "YAszuTrT",
+      "data": {
+        "component": {
+          "JkTrUhFk": {
+            "componentType": "code",
+            "name": "Input3",
+            "id": "JkTrUhFk",
+            "type": "Input",
+            "events": {
+            },
+            "props": {
+              "htmlType": "text",
+              "size": "medium",
+              "hasClear": false,
+              "fieldLabel": "标签2",
+              "width": "full",
+              "multiple": false,
+              "placeholder": "",
+              "rows": 4
+            }
+          },
+          "LanmXcHn": {
+            "componentType": "code",
+            "name": "Form1",
+            "id": "LanmXcHn",
+            "type": "Form",
+            "events": {
+            },
+            "props": {
+              "_dataSource": "${datasource(\"Form1Ds\")}",
+              "hidden": false,
+              "inline": false,
+              "labelAlign": "left",
+              "labelTextAlign": "right"
+            }
+          },
+          "yAGIMkER": {
+            "componentType": "code",
+            "name": "Input1",
+            "id": "yAGIMkER",
+            "type": "Input",
+            "events": {
+            },
+            "props": {
+              "htmlType": "text",
+              "size": "medium",
+              "hasClear": false,
+              "fieldLabel": "标签1",
+              "width": "full",
+              "multiple": false,
+              "placeholder": "",
+              "rows": 4
+            }
+          },
+          "NQRoACrM": {
+            "componentType": "code",
+            "name": "Input2",
+            "id": "NQRoACrM",
+            "type": "Input",
+            "events": {
+            },
+            "props": {
+              "htmlType": "text",
+              "size": "medium",
+              "hasClear": false,
+              "fieldLabel": "标签3",
+              "width": "full",
+              "multiple": false,
+              "placeholder": "",
+              "rows": 4
+            }
+          },
+          "GzQjhUQq": {
+            "componentType": "datasource",
+            "id": "GzQjhUQq",
+            "props": {
+              "data": "_pageParam_",
+              "cname": "页面参数"
+            }
+          },
+          "vwLRmgXY": {
+            "componentType": "code",
+            "name": "Slot1",
+            "id": "vwLRmgXY",
+            "type": "Slot",
+            "events": {
+            },
+            "props": {
+              "name": "kcsss"
+            }
+          },
+          "xxJvyAnr": {
+            "componentType": "datasource",
+            "id": "xxJvyAnr",
+            "props": {
+              "data": "Form1Ds",
+              "reserved": true,
+              "origin": "LanmXcHn",
+              "cname": "Form1数据"
+            }
+          }
+        },
+        "layout": [
+          {
+            "id": "LanmXcHn",
+            "children": [
+              {
+                "id": "yAGIMkER"
+              },
+              {
+                "id": "JkTrUhFk"
+              },
+              {
+                "id": "vwLRmgXY",
+                "children": [
+                  {
+                    "id": "NQRoACrM"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "model": {
+          "Form1Model": {
+            "field": {
+            },
+            "name": "Form1Model",
+            "cname": "Form1字段模型"
+          },
+          "_PageParam_": {
+            "field": {
+            },
+            "reserved": true,
+            "name": "_PageParam_",
+            "cname": "页面参数"
+          }
+        },
+        "data": {
+          "Form1Ds": {
+            "data": {
+            },
+            "type": "Form1Model"
+          },
+          "_pageParam_": {
+            "data": {
+            },
+            "reserved": true,
+            "type": "_PageParam_"
+          }
+        },
+        "request": {
+        },
+        "rule": [],
+        "style": "",
+        "action": "",
+        "module": {
+        }
+      },
+      "design": {
+      },
+      "schemaType": "pc",
+      "componentName": "test扩展容器"
+    },
+    "creator": "244694",
+    "css": [],
+    "depComponentCodes": [],
+    "depCssCodes": [],
+    "depJsCodes": [],
+    "description": null,
+    "devMode": null,
+    "devState": null,
+    "extensible": true,
+    "gmtCreate": {
+      "$date": "2020-09-04T07:06:34.918Z"
+    },
+    "gmtModified": {
+      "$date": "2020-10-15T07:45:24.954Z"
+    },
+    "groupId": null,
+    "historyId": "07649ff2-a432-4062-b0ad-b4a3b8d0dee2",
+    "js": [],
+    "name": "test扩展容器",
+    "overridable": false,
+    "override": null,
+    "pageType": "PC",
+    "pkgCode": "user_mgt",
+    "relatedPermissions": [],
+    "schemaVersion": null,
+    "slots": [
+      "user_mgt#test_slot#vwLRmgXY"
+    ],
+    "state": null,
+    "tableCode": null,
+    "type": "page",
+    "updater": "244694",
+    "useCustomPkgVersion": null
+  }
+]
